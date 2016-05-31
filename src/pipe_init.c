@@ -5,7 +5,7 @@
 ** Login   <julien@epitech.net>
 **
 ** Started on  Thu May 05 23:35:54 2016 julien
-** Last update Fri May 06 10:49:06 2016 julien
+** Last update Thu May 26 18:39:28 2016 Julien Leleu
 */
 
 #include	<stdlib.h>
@@ -14,30 +14,51 @@
 #include	"free.h"
 #include	"str.h"
 
-char	***my_triple_array(char **cut)
+void		special_free(char ***command, int nb)
 {
-  char	***cmd;
-  int	i;
+  int		i;
 
   i = 0;
+  while (i != nb)
+    {
+      if (command[i] != NULL)
+	free_env(command[i]);
+      i++;
+    }
+  free(command);
+}
+
+void		pipe_error()
+{
+  write(2, "Could not pipe, exit\n", 21);
+  exit(-1);
+}
+
+t_envi		*my_triple_array(char **cut, t_envi *instuctions)
+{
+  int		i;
+
+  i = 0;
+  instuctions->nb_cmd = 0;
   while (cut[i] != NULL)
     i++;
-  if ((cmd = malloc(sizeof(char **) * (i + 1))) == NULL)
+  if ((instuctions->command = malloc(sizeof(char **) * (i + 1))) == NULL)
     return (NULL);
   i = 0;
   while (cut[i] != NULL)
     {
-      cmd[i] = my_str_to_wordtab(cut[i], ' ');
+      instuctions->command[i] = my_str_to_wordtab(cut[i], ' ');
+      instuctions->nb_cmd++;
       i++;
     }
-  cmd[i] = NULL;
+  instuctions->command[i] = NULL;
   free_env(cut);
-  return (cmd);
+  return (instuctions);
 }
 
-char	***set_commaand(t_envi *instuctions, char ***command)
+char		***set_commands(t_envi *instuctions, char ***command)
 {
-  int	i;
+  int		i;
 
   i = 0;
   while (command[i] != NULL)
@@ -48,10 +69,10 @@ char	***set_commaand(t_envi *instuctions, char ***command)
   return (command);
 }
 
-int	nb_pipes(char *str)
+int		nb_pipes(char *str)
 {
-  int	i;
-  int	pipes;
+  int		i;
+  int		pipes;
 
   i = 0;
   pipes = 0;

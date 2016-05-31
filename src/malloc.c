@@ -5,15 +5,15 @@
 ** Login   <julien@epitech.net>
 **
 ** Started on  Fri May 06 10:54:31 2016 julien
-** Last update Fri May 06 10:54:33 2016 julien
+** Last update Thu May 26 18:38:25 2016 Julien Leleu
 */
 
 #include	<stdlib.h>
 #include	<unistd.h>
 
-char	*my_malloc(size_t size)
+char		*my_malloc(size_t size)
 {
-  char	*str;
+  char		*str;
 
   str = malloc(size);
   if (str == NULL)
@@ -24,9 +24,9 @@ char	*my_malloc(size_t size)
   return (str);
 }
 
-char	**my_double_malloc(size_t size)
+char		**my_double_malloc(size_t size)
 {
-  char	**str;
+  char		**str;
 
   str = malloc(size);
   if (str == NULL)

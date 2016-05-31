@@ -5,15 +5,15 @@
 ** Login   <julien@epitech.net>
 **
 ** Started on  Fri May 06 10:53:44 2016 julien
-** Last update Fri May 06 12:01:23 2016 julien
+** Last update Thu May 26 18:37:07 2016 Julien Leleu
 */
 
 #include	<stdlib.h>
 #include	"env.h"
 
-void	free_path(char *envp, char **path)
+void		free_path(char *envp, char **path)
 {
-  int	i;
+  int		i;
 
   i = 0;
   if (path != NULL)
@@ -29,9 +29,9 @@ void	free_path(char *envp, char **path)
     free(envp);
 }
 
-void	free_command(char *s, char **cmd)
+void		free_command(char *s, char **cmd)
 {
-  int	i;
+  int		i;
 
   i = 0;
   while (cmd[i] != NULL)
@@ -45,9 +45,9 @@ void	free_command(char *s, char **cmd)
     free(s);
 }
 
-void	free_all(t_envi *instuctions, char *s)
+void		free_all(t_envi *instuctions, char *s)
 {
-  int	i;
+  int		i;
 
   i = 0;
   if (instuctions->cmd != NULL)
@@ -73,9 +73,9 @@ void	free_all(t_envi *instuctions, char *s)
   free(instuctions);
 }
 
-void	doube_free(char **cmd1, char **cmd2)
+void		double_free(char **cmd1, char **cmd2)
 {
-  int	i;
+  int		i;
 
   i = 0;
   if (cmd1 != NULL)
@@ -99,9 +99,9 @@ void	doube_free(char **cmd1, char **cmd2)
     }
 }
 
-void	free_env(char **env)
+void		free_env(char **env)
 {
-  int	i;
+  int		i;
 
   i = 0;
   if (env != NULL)

@@ -5,7 +5,7 @@
 ** Login   <julien@epitech.net>
 **
 ** Started on  Fri May 06 10:52:10 2016 julien
-** Last update Fri May 06 11:03:23 2016 julien
+** Last update Thu May 26 18:33:04 2016 Julien Leleu
 */
 
 #include	<fcntl.h>
@@ -16,9 +16,9 @@
 #include	"free.h"
 #include	"str.h"
 
-int	is_right_chevron(char *str)
+int		is_right_chevron(char *str)
 {
-  int	i;
+  int		i;
 
   i = 0;
   while (str[i] != '\0')
@@ -35,10 +35,10 @@ int	is_right_chevron(char *str)
   return (0);
 }
 
-char	*get_path(char **path, char *s)
+char		*get_path(char **path, char *s)
 {
-  int	i;
-  char	*test;
+  int		i;
+  char		*test;
 
   i = 0;
   if (access(s, F_OK) == 0)
@@ -49,23 +49,19 @@ char	*get_path(char **path, char *s)
 	{
 	  test = my_strcat(path[i], s);
 	  if (access(test, F_OK) == 0)
-	    {
-	      free(s);
-	      return (test);
-	    }
+	    return (test);
 	  else
 	    free(test);
 	  i++;
 	}
       my_put_error(s, ": Command not found.\n");
-      free(s);
     }
   return (NULL);
 }
 
-int	open_the_file(char *file, int code)
+int		open_the_file(char *file, int code)
 {
-  int	fd;
+  int		fd;
 
   fd = -1;
   fd = (access(file, F_OK) != 0) ? open(file, O_CREAT | O_RDWR, 0644) : fd;
@@ -80,11 +76,11 @@ int	open_the_file(char *file, int code)
   return (fd);
 }
 
-void	right_redir(char **cmd, char **env, char *file, int code)
+void		right_redir(char **cmd, char **env, char *file, int code)
 {
-  int	fd;
-  pid_t	pid;
-  int	status;
+  int		fd;
+  pid_t		pid;
+  int		status;
 
   if (((fd = open_the_file(file, code)) != -1) && cmd[0] != NULL)
     {
@@ -106,11 +102,11 @@ void	right_redir(char **cmd, char **env, char *file, int code)
     }
 }
 
-void	right_chevron(char *s, t_envi *instuctions, int code)
+void		right_chevron(char *s, t_envi *instuctions, int code)
 {
-  char	**tmp;
-  char	**cmd;
-  int	i;
+  char		**tmp;
+  char		**cmd;
+  int		i;
 
   i = 0;
   tmp = my_str_to_wordtab(s, '>');

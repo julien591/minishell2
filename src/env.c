@@ -5,7 +5,7 @@
 ** Login   <julien@epitech.net>
 **
 ** Started on  Fri May 06 10:53:26 2016 julien
-** Last update Fri May 06 11:36:23 2016 julien
+** Last update Thu May 26 18:34:13 2016 Julien Leleu
 */
 
 #include	<stdlib.h>
@@ -13,10 +13,10 @@
 #include	"free.h"
 #include	"str.h"
 
-char	**copy_env(char **env)
+char		**copy_env(char **env)
 {
-  char	**env_cpy;
-  int	i;
+  char		**env_cpy;
+  int		i;
 
   i = 0;
   while (env[i] != NULL)
@@ -35,18 +35,17 @@ char	**copy_env(char **env)
   return (env_cpy);
 }
 
-char	**replace_env(char **env, char *line, char *to_replace)
+char		**replace_env(char **env, char *line, char *to_replace)
 {
-  int	i;
-  int	j;
-  int	k;
-  char	*str;
+  int		i;
+  int		j;
+  int		k;
+  char		*str;
 
   i = 0;
   j = 0;
   k = 1;
-  str = my_malloc(sizeof(char) * (my_strlen(line)+
-			 my_strlen(to_replace) + 2));
+  str = my_malloc(sizeof(char) * (my_strlen(line) + my_strlen(to_replace) + 2));
   while (env != NULL && env[i] != NULL && (k = my_strcmp(env[i], line)) != 0)
     i++;
   if (k != 0)
@@ -55,7 +54,7 @@ char	**replace_env(char **env, char *line, char *to_replace)
   while (line[j] != '\0')
     {
       str[j] = line[j];
-      j++;      
+      j++;
     }
   while (to_replace[k] != '\0')
     str[j++] = to_replace[k++];
@@ -65,10 +64,10 @@ char	**replace_env(char **env, char *line, char *to_replace)
   return (env);
 }
 
-char	*set_new_value(char *str, char *setting, char *value)
+char		*set_new_value(char *str, char *setting, char *value)
 {
-  int	i;
-  int	j;
+  int		i;
+  int		j;
 
   i = 0;
   j = 0;
@@ -92,10 +91,10 @@ char	*set_new_value(char *str, char *setting, char *value)
   return (str);
 }
 
-void	new_env(t_envi *ins)
+void		new_env(t_envi *ins)
 {
-  char **new;
-  int	i;
+  char 		**new;
+  int		i;
 
   i = 0;
   while (ins->env[i] != NULL)

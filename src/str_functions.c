@@ -5,7 +5,7 @@
 ** Login   <julien@epitech.net>
 **
 ** Started on  Fri May 06 10:55:20 2016 julien
-** Last update Fri May 06 10:55:21 2016 julien
+** Last update Fri May 27 10:57:50 2016 Julien Leleu
 */
 
 #include	<stdlib.h>
@@ -13,9 +13,9 @@
 #include	"env.h"
 #include	"str.h"
 
-char	*my_strcpy(char *dest, char *src)
+char		*my_strcpy(char *dest, char *src)
 {
-  int i;
+  int 	i;
 
   i = 0;
   while (src[i] != 0)
@@ -27,14 +27,14 @@ char	*my_strcpy(char *dest, char *src)
   return (dest);
 }
 
-void	my_putstr(char *str)
+void		my_putstr(char *str)
 {
   write(1, str, my_strlen(str));
 }
 
-int	my_strlen(char *str)
+int		my_strlen(char *str)
 {
-  int	i;
+  int		i;
 
   i = 0;
   while (str[i] != '\0')
@@ -42,9 +42,9 @@ int	my_strlen(char *str)
   return (i);
 }
 
-int	my_strcmp(char *s1, char *s2)
+int		my_strcmp(char *s1, char *s2)
 {
-  int 	i;
+  int 		i;
 
   i = 0;
   while (s2[i] != '\0')
@@ -57,17 +57,15 @@ int	my_strcmp(char *s1, char *s2)
   return (0);
 }
 
-char	*my_strcat(char *path, char *cmd)
+char		*my_strcat(char *path, char *cmd)
 {
-  int	i;
-  int	j;
-  char	*str;
+  int		i;
+  int		j;
+  char		*str;
 
   i = 0;
   j = 0;
-  str = my_malloc(sizeof(char) * (my_strlen(path) + my_strlen(cmd) + 2));
-  if (str == NULL)
-    return (NULL);
+  str = my_malloc(sizeof(char) * (my_strlen(path) + my_strlen(cmd) + 3));
   while (path[i] != '\0')
     {
       str[i] = path[i];

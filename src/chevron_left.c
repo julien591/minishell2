@@ -5,7 +5,7 @@
 ** Login   <julien@epitech.net>
 **
 ** Started on  Fri May 06 10:52:03 2016 julien
-** Last update Fri May 06 11:02:37 2016 julien
+** Last update Fri May 27 11:18:51 2016 Julien Leleu
 */
 
 #include	<fcntl.h>
@@ -16,9 +16,9 @@
 #include	"free.h"
 #include	"str.h"
 
-int	is_left_chevron(char *str)
+int		is_left_chevron(char *str)
 {
-  int	i;
+  int		i;
 
   i = 0;
   while (str[i] != '\0')
@@ -35,9 +35,9 @@ int	is_left_chevron(char *str)
   return (0);
 }
 
-int	open_file(char *file)
+int		open_file(char *file)
 {
-  int	fd;
+  int		fd;
 
   fd = open(file, O_CREAT | O_RDWR);
   if (fd == -1)
@@ -50,11 +50,11 @@ int	open_file(char *file)
   return (fd);
 }
 
-int	left_redir(char *bin, char **cmd, char **env, char *file)
+int		left_redir(char *bin, char **cmd, char **env, char *file)
 {
-  int	fd;
-  pid_t	pid;
-  int	status;
+  int		fd;
+  pid_t		pid;
+  int		status;
 
   if ((fd = open_file(file)) == -1)
     return (-1);
@@ -77,12 +77,12 @@ int	left_redir(char *bin, char **cmd, char **env, char *file)
   return (0);
 }
 
-void	left_chevron(char *s, t_envi *instuctions)
+void		left_chevron(char *s, t_envi *instuctions)
 {
-  char	**tmp;
-  char	**cmd;
-  char	*bin;
-  int	i;
+  char		**tmp;
+  char		**cmd;
+  char		*bin;
+  int		i;
 
   i = 0;
   tmp = my_str_to_wordtab(s, '<');
@@ -96,5 +96,4 @@ void	left_chevron(char *s, t_envi *instuctions)
   left_redir(bin, cmd, instuctions->env, tmp[i - 1]);
   free_cmd(cmd);
   free_cmd(tmp);
-  free(bin);
 }

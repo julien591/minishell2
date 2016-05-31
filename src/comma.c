@@ -5,7 +5,7 @@
 ** Login   <julien@epitech.net>
 **
 ** Started on  Fri May 06 10:53:17 2016 julien
-** Last update Fri May 06 11:04:24 2016 julien
+** Last update Thu May 26 18:33:32 2016 Julien Leleu
 */
 
 #include	<stdlib.h>
@@ -13,9 +13,9 @@
 #include	"builtin.h"
 #include	"str.h"
 
-int	is_comma(char *str)
+int		is_comma(char *str)
 {
-  int	i;
+  int		i;
 
   i = 0;
   while (str[i] != '\0')
@@ -27,24 +27,27 @@ int	is_comma(char *str)
   return (0);
 }
 
-void	free_cmd(char **cmd)
+void		free_cmd(char **cmd)
 {
-  int	i;
+  int		i;
 
   i = 0;
-  while (cmd[i] != NULL)
+  if (cmd != NULL)
     {
-      free(cmd[i]);
-      i++;
+      while (cmd[i] != NULL)
+	{
+	  free(cmd[i]);
+	  i++;
+	}
+      free(cmd);
     }
-  free(cmd);
 }
 
-void	comma(char *s, t_envi *instuctions)
+void		comma(char *s, t_envi *instuctions)
 {
-  char	**tmp;
-  char	**cmd;
-  int	i;
+  char		**tmp;
+  char		**cmd;
+  int		i;
 
   i = 0;
   tmp = my_str_to_wordtab(s, ';');

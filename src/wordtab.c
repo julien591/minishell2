@@ -5,17 +5,17 @@
 ** Login   <julien@epitech.net>
 **
 ** Started on  Fri May 06 10:55:33 2016 julien
-** Last update Fri May 06 10:55:35 2016 julien
+** Last update Fri May 27 11:46:00 2016 Julien Leleu
 */
 
 #include	<stdlib.h>
 #include	"env.h"
 #include	"str.h"
 
-int	count_word(char *str, char elem)
+int		count_word(char *str, char elem)
 {
-  int 	i;
-  int	word;
+  int 		i;
+  int		word;
 
   i = 0;
   word = 0;
@@ -28,13 +28,13 @@ int	count_word(char *str, char elem)
   return (word + 1);
 }
 
-char	**my_str_to_wordtab(char *str, char elem)
+char		**my_str_to_wordtab(char *str, char elem)
 {
-  char	**ret;
-  int	words;
-  int	i;
-  int	j;
-  int	k;
+  char		**ret;
+  int		words;
+  int		i;
+  int		j;
+  int		k;
 
   i = 0;
   k = 0;

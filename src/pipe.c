@@ -5,7 +5,7 @@
 ** Login   <julien@epitech.net>
 **
 ** Started on  Fri May 06 10:54:52 2016 julien
-** Last update Fri May 06 11:12:32 2016 julien
+** Last update Thu May 26 18:40:17 2016 Julien Leleu
 */
 
 #include	<stdlib.h>
@@ -17,10 +17,24 @@
 #include	"str.h"
 #include	"token.h"
 
-int	is_pipe(char *str)
+int		check(char ***command, int nb)
 {
-  int	i;
-  int	pip;
+  int		i;
+
+  i = 0;
+  while (i != nb)
+    {
+      if (command[i][0] == NULL || access(command[i][0], F_OK) != 0)
+	return (-1);
+      i++;
+    }
+  return (0);
+}
+
+int		is_pipe(char *str)
+{
+  int		i;
+  int		pip;
 
   i = 0;
   pip = 0;
@@ -33,10 +47,10 @@ int	is_pipe(char *str)
   return (pip);
 }
 
-void	end(int p[], int nb, char ***command)
+void		end(int p[], int nb, char ***command)
 {
-  int	i;
-  int	status;
+  int		i;
+  int		status;
 
   i = 0;
   status = 0;
@@ -60,12 +74,12 @@ void	end(int p[], int nb, char ***command)
   free(command);
 }
 
-void	exec_pipe(char **env, char ***command, int p[], int nb)
+void		exec_pipe(char **env, char ***command, int p[], int nb)
 {
-  pid_t	pid;
-  int	i;
-  int	j;
-  int	k;
+  pid_t		pid;
+  int		i;
+  int		j;
+  int		k;
 
   i = 0;
   j = 0;
@@ -88,12 +102,11 @@ void	exec_pipe(char **env, char ***command, int p[], int nb)
   end(p, nb, command);
 }
 
-void	init_pipe(char *s, t_envi *instuctions)
+void		init_pipe(char *s, t_envi *instuctions)
 {
-  char	***command;
-  char	**tmp;
-  int	p[2 * nb_pipes(s)];
-  int	i;
+  char		**tmp;
+  int		p[2 * nb_pipes(s)];
+  int		i;
 
   i = 0;
   tmp = my_str_to_wordtab(s, '|');
@@ -103,16 +116,16 @@ void	init_pipe(char *s, t_envi *instuctions)
       i++;
     }
   i = 0;
-  command = my_triple_array(tmp);
+  instuctions = my_triple_array(tmp, instuctions);
   while (i < nb_pipes(s))
     {
       if (pipe(p + i * 2) < 0)
-	{
-	  write(2, "Could not pipe, exit\n", 21);
-	  exit(-1);
-	}
+	pipe_error();
       i++;
     }
-  command = set_commaand(instuctions, command);
-  exec_pipe(instuctions->env, command, p, (2 * nb_pipes(s)));
+  instuctions->command = set_commands(instuctions, instuctions->command);
+  if (check(instuctions->command, instuctions->nb_cmd) != -1)
+    exec_pipe(instuctions->env, instuctions->command, p, (2 * nb_pipes(s)));
+  else
+    special_free(instuctions->command, instuctions->nb_cmd);
 }

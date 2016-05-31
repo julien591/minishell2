@@ -5,7 +5,7 @@
 ** Login   <julien@epitech.net>
 **
 ** Started on  Fri May 06 10:51:54 2016 julien
-** Last update Fri May 06 14:43:55 2016 julien
+** Last update Thu May 26 18:31:34 2016 Julien Leleu
 */
 
 #include	<fcntl.h>
@@ -18,10 +18,10 @@
 #include	"free.h"
 #include	"str.h"
 
-int	fill_tmp(char *end)
+int		fill_tmp(char *end)
 {
-  char	*s;
-  int	fd;
+  char		*s;
+  int		fd;
 
   fd = open("/tmp/minishell2_tmp", O_CREAT | O_RDWR, S_IRUSR | S_IWUSR);
   if (fd == -1)
@@ -41,11 +41,11 @@ int	fill_tmp(char *end)
   return (fd);
 }
 
-int	double_left_redir(char *bin, char **cmd, char **env, char *end)
+int		double_left_redir(char *bin, char **cmd, char **env, char *end)
 {
-  int	fd;
-  int	status;
-  pid_t	pid;
+  int		fd;
+  int		status;
+  pid_t		pid;
 
   if ((fd = fill_tmp(end)) == -1)
     return (0);
@@ -69,12 +69,12 @@ int	double_left_redir(char *bin, char **cmd, char **env, char *end)
   return (0);
 }
 
-void	double_left_chevron(char *s, t_envi *instuctions)
+void		double_left_chevron(char *s, t_envi *instuctions)
 {
-  char	**tmp;
-  char	**cmd;
-  char	*bin;
-  int	i;
+  char		**tmp;
+  char		**cmd;
+  char		*bin;
+  int		i;
 
   i = 0;
   tmp = my_str_to_wordtab(s, '<');

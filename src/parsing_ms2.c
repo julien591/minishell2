@@ -5,7 +5,7 @@
 ** Login   <julien@epitech.net>
 **
 ** Started on  Fri May 06 10:54:40 2016 julien
-** Last update Fri May 06 15:07:57 2016 julien
+** Last update Thu May 26 18:38:52 2016 Julien Leleu
 */
 
 #include	<unistd.h>
@@ -13,9 +13,9 @@
 #include	"str.h"
 #include	"token.h"
 
-int	check_pipe(char *s)
+int		check_pipe(char *s)
 {
-  int	i;
+  int		i;
 
   i = 0;
   while (i != my_strlen(s))
@@ -27,9 +27,9 @@ int	check_pipe(char *s)
   return (0);
 }
 
-int	check_error_m2(char *s, char **cmd)
+int		check_error_m2(char *s, char **cmd)
 {
-  int	i;
+  int		i;
 
   i = 0;
   if (my_strcmp(cmd[0], "|") == 0)
@@ -55,9 +55,9 @@ int	check_error_m2(char *s, char **cmd)
   return (0);
 }
 
-int	check_chevron(char *s, t_envi *instuctions)
+int		check_chevron(char *s, t_envi *instuctions)
 {
-  int	i;
+  int		i;
 
   if ((i = is_right_chevron(s)) >= 1)
     {
@@ -77,9 +77,9 @@ int	check_chevron(char *s, t_envi *instuctions)
   return (0);
 }
 
-int	general_pars2(char *s, t_envi *instuctions)
+int		general_pars2(char *s, t_envi *instuctions)
 {
-  int	i;
+  int		i;
 
   if (check_error_m2(s, instuctions->cmd) == -1)
     return (-1);

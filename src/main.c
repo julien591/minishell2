@@ -5,7 +5,7 @@
 ** Login   <julien@epitech.net>
 **
 ** Started on  Fri May 06 10:54:22 2016 julien
-** Last update Fri May 06 11:11:38 2016 julien
+** Last update Thu May 26 18:38:13 2016 Julien Leleu
 */
 
 #include	<signal.h>
@@ -16,18 +16,21 @@
 #include	"free.h"
 #include	"str.h"
 
-int	prompt()
+int		prompt()
 {
-  char	dir[1024];
+  char		dir[1024];
 
   if (getcwd(dir, sizeof(dir)) == NULL)
     return (0);
-  write(2, dir, my_strlen(dir));
-  write(2, " > ", 3);
+  if (isatty(1) == 1)
+    {
+      write(1, dir, my_strlen(dir));
+      write(1, " > ", 3);
+    }
   return (0);
 }
 
-void	handle_ctrl_c(int sig)
+void		handle_ctrl_c(int sig)
 {
   signal(SIGINT, handle_ctrl_c);
   if (sig == SIGINT)
@@ -37,9 +40,9 @@ void	handle_ctrl_c(int sig)
     }
 }
 
-char	*read_stdin()
+char		*read_stdin()
 {
-  char	*s;
+  char		*s;
 
   s = NULL;
   while (s == NULL)
@@ -52,6 +55,11 @@ char	*read_stdin()
 	  s = NULL;
 	}
       if (s != NULL && ((just_comma(s) == 1) || (just_space(s, 0) == 1)))
+	{
+	  free(s);
+	  s = NULL;
+	}
+      if (s != NULL && (my_strcmp("/", s) == 0))
 	{
 	  free(s);
 	  s = NULL;

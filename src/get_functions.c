@@ -5,7 +5,7 @@
 ** Login   <julien@epitech.net>
 **
 ** Started on  Fri May 06 10:54:01 2016 julien
-** Last update Fri May 06 10:54:02 2016 julien
+** Last update Thu May 26 18:37:52 2016 Julien Leleu
 */
 
 #include	<stdlib.h>
@@ -14,11 +14,11 @@
 #include	"str.h"
 #include	"token.h"
 
-int	my_getnbr(char *str)
+int		my_getnbr(char *str)
 {
-  int i;
-  int nbr;
-  int negatif;
+  int 		i;
+  int 		nbr;
+  int 		negatif;
 
   i = 0;
   nbr = 0;
@@ -42,13 +42,13 @@ int	my_getnbr(char *str)
   return (nbr);
 }
 
-char	*my_getenv(char **env)
+char		*my_getenv(char **env)
 {
-  int	i;
-  int	j;
-  int	k;
-  int	cmp;
-  char	*ret;
+  int		i;
+  int		j;
+  int		k;
+  int		cmp;
+  char		*ret;
 
   i = 0;
   j = 5;
@@ -69,12 +69,12 @@ char	*my_getenv(char **env)
   return (ret);
 }
 
-char	*my_gethome(char **env)
+char		*my_gethome(char **env)
 {
-  int	i;
-  int	j;
-  int	k;
-  char	*ret;
+  int		i;
+  int		j;
+  int		k;
+  char		*ret;
 
   i = 0;
   j = 5;
@@ -95,12 +95,12 @@ char	*my_gethome(char **env)
   return (ret);
 }
 
-char	*my_get_old_pwd(char **env)
+char		*my_get_old_pwd(char **env)
 {
-  int	i;
-  int	j;
-  int	k;
-  char	*ret;
+  int		i;
+  int		j;
+  int		k;
+  char		*ret;
 
   i = 0;
   j = 7;

@@ -5,7 +5,7 @@
 ** Login   <julien@epitech.net>
 **
 ** Started on  Fri May 06 10:51:21 2016 julien
-** Last update Fri May 06 14:41:56 2016 julien
+** Last update Fri May 27 12:23:59 2016 Julien Leleu
 */
 
 #include	<unistd.h>
@@ -15,9 +15,9 @@
 #include	"free.h"
 #include	"builtin.h"
 
-void	builtin_env(char **env)
+void		builtin_env(char **env)
 {
-  int	i;
+  int		i;
 
   i = 0;
   while (env[i] != NULL)
@@ -28,15 +28,15 @@ void	builtin_env(char **env)
     }
 }
 
-int	exit_check(char *str)
+int		exit_check(char *str)
 {
-  int	i;
+  int		i;
 
   i = (str[0] == '-') ? 1 : 0;
   while (str[i] != '\0')
     {
       if (str[i] >= '0' && str[i] <= '9')
-      i++;
+	i++;
       else if (str[i] == '-')
 	{
 	  write(2, "exit: Badly formed number.\n", 27);
@@ -51,10 +51,10 @@ int	exit_check(char *str)
   return (0);
 }
 
-void	builtin_exit(t_envi *instuctions, char *s)
+void		builtin_exit(t_envi *instuctions, char *s)
 {
-  int	nb_exit;
-  int	i;
+  int		nb_exit;
+  int		i;
 
   i = 0;
   while (instuctions->cmd[i] != NULL)
@@ -79,16 +79,14 @@ void	builtin_exit(t_envi *instuctions, char *s)
     write(2, "exit: Expression Syntax.\n", 25);
 }
 
-int	test_builtin(t_envi *instuctions, char *s)
+int		test_builtin(t_envi *instuctions, char *s)
 {
-  int	nb_arg;
-
-  nb_arg = 0;
-  while (instuctions->cmd[nb_arg] != '\0')
-    nb_arg++;
+  instuctions->nb_cmd = 0;
+  while (instuctions->cmd[instuctions->nb_cmd] != '\0')
+    instuctions->nb_cmd++;
   if (my_strcmp(instuctions->cmd[0], "cd") == 0)
     {
-      builtin_cd(instuctions, nb_arg);
+      builtin_cd(instuctions, instuctions->nb_cmd);
       return (0);
     }
   else if (my_strcmp(instuctions->cmd[0], "env") == 0)

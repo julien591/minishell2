@@ -5,7 +5,7 @@
 ** Login   <julien@epitech.net>
 **
 ** Started on  Fri May 06 10:55:11 2016 julien
-** Last update Fri May 06 11:18:51 2016 julien
+** Last update Fri May 27 11:48:08 2016 Julien Leleu
 */
 
 #include	<stdlib.h>
@@ -15,9 +15,9 @@
 #include	"str.h"
 #include	"free.h"
 
-char	*replace_value(char *ret, int i, char *value, char **env)
+char		*replace_value(char *ret, int i, char *value, char **env)
 {
-  int	j;
+  int		j;
 
   j = 0;
   while (env[i][j] != '=')
@@ -42,10 +42,10 @@ char	*replace_value(char *ret, int i, char *value, char **env)
   return (ret);
 }
 
-void	setenv_(t_envi *ins)
+void		setenv_(t_envi *ins)
 {
-  int	i;
-  char	*ret;
+  int		i;
+  char		*ret;
 
   i = 0;
   while ((my_strcmp(ins->env[i], ins->cmd[1])) != 0)
@@ -56,10 +56,20 @@ void	setenv_(t_envi *ins)
   ins->env[i] = ret;
 }
 
-int	is_exist(char **env, char *to_find)
+int		is_exist(char **env, char *to_find)
 {
-  int	i;
+  int		i;
 
+  i = 0;
+  while (to_find[i] != '\0')
+    {
+      if (to_find[i] == '=')
+	{
+	  write(2, "Error:Variable name must contain alphanumeric characters.\n", 58);
+	  return (-1);
+	}
+      i++;
+    }
   i = 0;
   while (env[i] != NULL)
     {
@@ -70,11 +80,11 @@ int	is_exist(char **env, char *to_find)
   return (0);
 }
 
-void	del_value(t_envi *ins)
+void		del_value(t_envi *ins)
 {
-  char	**new;
-  int	i;
-  int	j;
+  char		**new;
+  int		i;
+  int		j;
 
   i = 0;
   j = 0;
@@ -99,22 +109,25 @@ void	del_value(t_envi *ins)
   ins->env = new;
 }
 
-void	setenv_unsetenv(t_envi *instuctions)
+void		setenv_unsetenv(t_envi *instuctions)
 {
+  int	test;
+
+  test = is_exist(instuctions->env, instuctions->cmd[1]);
   if (my_strcmp(instuctions->cmd[0], "setenv") == 0)
     {
       if (instuctions->cmd[1] == NULL)
 	builtin_env(instuctions->env);
-      else if (is_exist(instuctions->env, instuctions->cmd[1]) == 1)
+      else if (test == 1)
 	setenv_(instuctions);
-      else if (is_exist(instuctions->env, instuctions->cmd[1]) == 0)
+      else if (test == 0)
 	new_env(instuctions);
     }
   if (my_strcmp(instuctions->cmd[0], "unsetenv") == 0)
     {
       if (instuctions->cmd[1] == NULL)
 	write(2, "unsetenv: Too few arguments.\n", 29);
-      else if (is_exist(instuctions->env, instuctions->cmd[1]) == 1)
+      else if (test == 1)
 	del_value(instuctions);
     }
 }

@@ -1,11 +1,11 @@
 /*
 ** execute.c for PSU_2015_minishell2 in /home/julien/PSU_2015_minishell2/src
 **
-** Made by julien
+** Made by Julien
 ** Login   <julien@epitech.net>
 **
-** Started on  Fri May 06 10:53:37 2016 julien
-** Last update Fri May 06 11:09:01 2016 julien
+** Started on  Thu May 26 18:35:11 2016 Julien
+** Last update Fri May 27 10:53:22 2016 Julien Leleu
 */
 
 #include	<unistd.h>
@@ -15,11 +15,38 @@
 #include	"env.h"
 #include	"str.h"
 
-void	my_put_error(char *str, char *command)
+int		more_one_slash(char *str)
+{
+  int		i;
+  int		j;
+
+  i = 0;
+  if (str == NULL)
+    return (-1);
+  while (str[i] != '\0')
+    {
+      if (str[i] == '/')
+	{
+	  j = 0;
+	  while (str[i] == '/' && str[i] != '\0')
+	    {
+	      j++;
+	      i++;
+	    }
+	  if (j > 1)
+	    return (1);
+	}
+      i++;
+    }
+  return (0);
+}
+
+void		my_put_error(char *str, char *command)
 {
   if (my_strcmp(str, "cd") == 0)
     {
-      write(2, command, my_strlen(command));
+      if (command != NULL)
+	write(2, command, my_strlen(command));
       write(2, ": No such file or directory.\n", 29);
     }
   else
@@ -29,10 +56,10 @@ void	my_put_error(char *str, char *command)
     }
 }
 
-void	execute(char *file, t_envi *instuctions, char **cmd)
+void		execute(char *file, t_envi *instuctions, char **cmd)
 {
-  pid_t pid;
-  int	status;
+  pid_t 	pid;
+  int		status;
 
   pid = fork();
   if (pid > 0)
@@ -49,10 +76,10 @@ void	execute(char *file, t_envi *instuctions, char **cmd)
     }
 }
 
-int	my_test(t_envi *instuctions, char **cmd)
+int		my_test(t_envi *instuctions, char **cmd)
 {
-  int	i;
-  char	*test;
+  int		i;
+  char		*test;
 
   i = 0;
   if (access(cmd[0], F_OK) == 0)
@@ -62,7 +89,7 @@ int	my_test(t_envi *instuctions, char **cmd)
       while (instuctions->path[i] != '\0')
 	{
 	  test = my_strcat(instuctions->path[i], cmd[0]);
-	  if (access(test, F_OK) == 0)
+	  if ((access(test, F_OK) == 0) && (more_one_slash(test) == 0))
 	    {
 	      execute(test, instuctions, cmd);
 	      free(test);

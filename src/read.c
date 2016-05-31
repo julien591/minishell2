@@ -5,7 +5,7 @@
 ** Login   <julien@epitech.net>
 **
 ** Started on  Fri May 06 10:55:00 2016 julien
-** Last update Fri May 06 11:12:48 2016 julien
+** Last update Thu May 26 18:40:54 2016 Julien Leleu
 */
 
 #include	<stdlib.h>
@@ -13,9 +13,9 @@
 #include	"env.h"
 #include	"str.h"
 
-int	just_space(char *str, int i)
+int		just_space(char *str, int i)
 {
-  int	space;
+  int		space;
 
   space = 1;
   while (str[i] != '\0')
@@ -27,10 +27,10 @@ int	just_space(char *str, int i)
   return (space);
 }
 
-int	just_comma(char *str)
+int		just_comma(char *str)
 {
-  int	comma;
-  int	i;
+  int		comma;
+  int		i;
 
   comma = 1;
   i = 0;
@@ -43,11 +43,11 @@ int	just_comma(char *str)
   return (comma);
 }
 
-char	*del_space(char *str)
+char		*del_space(char *str)
 {
-  char	*ret;
-  int	i;
-  int	j;
+  char		*ret;
+  int		i;
+  int		j;
 
   i = 0;
   j = 0;
@@ -69,12 +69,12 @@ char	*del_space(char *str)
   return (ret);
 }
 
-char	*my_read()
+char		*my_read()
 {
-  char	buf[4096];
-  char	*s;
-  int	nb;
-  int	i;
+  char		buf[4096];
+  char		*s;
+  int		nb;
+  int		i;
 
   i = 0;
   nb = read(0, buf, 4096);
